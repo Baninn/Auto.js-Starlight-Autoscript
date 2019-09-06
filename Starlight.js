@@ -59,12 +59,14 @@ do{
             click(x, y);
             sleep(500);
             room=null;
+            sleep(1000);
             auto();
             requestScreenCapture();
             var 刷新 = images.read("/storage/emulated/0/img/刷新.jpg");
             var refresh = findImage(captureScreen(), 刷新, {threshold: 0.8});
-            let { a, b } = refresh;
-            click(a, b);
+            let { xx, yy } = refresh;
+            log("准备点刷新");
+            click(xx, yy);
             log("点刷新");
             sleep(500);
         }else{
@@ -192,4 +194,3 @@ if(cancel){
 }else{
     log("没找到取消");
 }
-exit();
