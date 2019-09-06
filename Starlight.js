@@ -33,6 +33,12 @@ do{
 while(找到房=true);
 找OK；
 */
+auto();
+requestScreenCapture();
+var 刷新 = images.read("/storage/emulated/0/img/刷新.jpg");
+var refresh = findImage(captureScreen(), 刷新, {threshold: 0.8});
+let { shua, xin } = refresh;
+
 log("准备找房");
 do{
     log("开始找房");
@@ -60,13 +66,10 @@ do{
             sleep(500);
             room=null;
             sleep(1000);
-            auto();
-            requestScreenCapture();
-            var 刷新 = images.read("/storage/emulated/0/img/刷新.jpg");
-            var refresh = findImage(captureScreen(), 刷新, {threshold: 0.8});
-            let { xx, yy } = refresh;
-            log("准备点刷新");
-            click(xx, yy);
+            let { shua, xin } = refresh;
+            log("准备点刷新"+refresh+shua+xin);
+            //click(shua,xin);
+            click(1604, 358);
             log("点刷新");
             sleep(500);
         }else{
@@ -107,10 +110,13 @@ click(1464,853);
 sleep(2000);
 
 //选择三个角色
+log("第一个角色");
 click(59,826);//三个角色坐标范围[59,826/198,973][232,826/371,973][402,826/541,973]
 sleep(1000);
+log("第二个角色");
 click(232,826);
 sleep(1000);
+log("第三个角色");
 click(402,826);
 sleep(1000);
 /*
@@ -122,10 +128,9 @@ let { x, y } = ready;
 click(x, y);
 */
 //点准备
+log("准备OK");
 click(1585,937);
 sleep(3000);
-
-
 
 do{
     log("找自动");
