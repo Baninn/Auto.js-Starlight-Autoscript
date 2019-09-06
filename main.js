@@ -38,7 +38,7 @@ do{
     log("开始找房");
     auto();
     requestScreenCapture();
-    var 房 = images.read("/storage/emulated/0/img/房.jpg");
+    var 房 = images.read("房.jpg");
     log("找到房模板");
     var room = findImage(captureScreen(), 房, {threshold: 0.8});
     if(room){
@@ -50,7 +50,7 @@ do{
         sleep(1000);
         auto();
         requestScreenCapture();
-        var close = images.read("/storage/emulated/0/img/关.jpg");
+        var close = images.read("关.jpg");
         log("找到关模板");
         var close = findImage(captureScreen(), close, {threshold: 0.6});
         if(close){
@@ -59,14 +59,6 @@ do{
             click(x, y);
             sleep(500);
             room=null;
-            auto();
-            requestScreenCapture();
-            var 刷新 = images.read("/storage/emulated/0/img/刷新.jpg");
-            var refresh = findImage(captureScreen(), 刷新, {threshold: 0.8});
-            let { a, b } = refresh;
-            click(a, b);
-            log("点刷新");
-            sleep(500);
         }else{
             log("房还在");
         }
@@ -75,7 +67,7 @@ do{
         log("没找到房");
         auto();
         requestScreenCapture();
-        var 刷新 = images.read("/storage/emulated/0/img/刷新.jpg");
+        var 刷新 = images.read("刷新.jpg");
         var refresh = findImage(captureScreen(), 刷新, {threshold: 0.8});
         let { x, y } = refresh;
         click(x, y);
@@ -89,7 +81,7 @@ sleep(3000);
 /*
 auto();
 requestScreenCapture();
-var decide = images.read("/storage/emulated/0/img/决定.jpg");
+var decide = images.read("决定.jpg");
 log("找到图了");
 var decide = findImage(captureScreen(), decide, {region: [1391, 781, 500, 200],threshold: 0.8});
 if(decide){
@@ -114,7 +106,7 @@ sleep(1000);
 /*
 auto();
 requestScreenCapture();
-var ready = images.read("/storage/emulated/0/img/准备.jpg");
+var ready = images.read("准备.jpg");
 var ready = findImage(captureScreen(), ready, {threshold: 0.8});
 let { x, y } = ready;
 click(x, y);
@@ -123,35 +115,25 @@ click(x, y);
 click(1585,937);
 sleep(3000);
 
-
-
 do{
     log("找自动");
     auto();
     requestScreenCapture();
-    var at = images.read("/storage/emulated/0/img/auto.jpg");
+    var at = images.read("auto.jpg");
     var at = findImage(captureScreen(), at, {threshold: 0.8});
-    var close = images.read("/storage/emulated/0/img/关.jpg");
-    var close = findImage(captureScreen(), close, {threshold: 0.6});
-    if(close){
-        log("找到取消");
-        let { x, y } = close ;
-        click(x, y);
-        exit();
-    }
     if(at){
         log("找到自动");
         sleep(4000)
         let { x, y } = at;
         click(x, y);
     }
-    
+    log("没找到自动，继续");
   }
 while(at==null);
 /*
 auto();
 requestScreenCapture();
-var Merci = images.read("/storage/emulated/0/img/Merci.jpg");
+var Merci = images.read("Merci.jpg");
 var Merci = findImage(captureScreen(), Merci, {threshold: 0.8});
 let { x, y } = Merci;
 click(x, y);
@@ -159,7 +141,7 @@ click(x, y);
 /*
 auto();
 requestScreenCapture();
-var again = images.read("/storage/emulated/0/img/再入室.jpg");
+var again = images.read("再入室.jpg");
 var again = findImage(captureScreen(), again, {threshold: 0.8});
 let { x, y } = again;
 click(x, y);
@@ -168,7 +150,7 @@ do{
     log("找再入室");
     auto();
     requestScreenCapture();
-    var again = images.read("/storage/emulated/0/img/再入室2.jpg");
+    var again = images.read("再入室2.jpg");
     var again = findImage(captureScreen(), again, {threshold: 0.8});
     if(again){
         log("找到再入室");
@@ -183,7 +165,7 @@ sleep(2000)
 
 auto();
 requestScreenCapture();
-var cancel = images.read("/storage/emulated/0/img/取消2.jpg");
+var cancel = images.read("取消2.jpg");
 var cancel = findImage(captureScreen(), cancel, {threshold: 0.8});
 if(cancel){
     log("找到取消");
@@ -192,4 +174,4 @@ if(cancel){
 }else{
     log("没找到取消");
 }
-exit();
+
