@@ -1,7 +1,7 @@
 console.log('脚本启动')
-auto()
+//auto()
 sleep(1000)
-
+/*
 console.log('请求截图')
 if (!requestScreenCapture(true)) {
   toast('请求截图失败')
@@ -9,6 +9,7 @@ if (!requestScreenCapture(true)) {
   exit()
 }
 toastLog('请求截图成功')
+*/
 /*
 const SDCARD = files.getSdcardPath()
 const BASE = ''
@@ -37,7 +38,7 @@ auto();
 requestScreenCapture();
 var 刷新 = images.read("/storage/emulated/0/img/刷新.jpg");
 var refresh = findImage(captureScreen(), 刷新, {threshold: 0.8});
-let { shua, xin } = refresh;
+//let { shua, xin } = refresh;
 
 log("准备找房");
 do{
@@ -66,8 +67,8 @@ do{
             sleep(500);
             room=null;
             sleep(1000);
-            let { shua, xin } = refresh;
-            log("准备点刷新"+refresh+shua+xin);
+            //let { shua, xin } = refresh;
+            //log("准备点刷新"+refresh+shua+xin);
             //click(shua,xin);
             click(1604, 358);
             log("点刷新");
@@ -82,8 +83,9 @@ do{
         requestScreenCapture();
         var 刷新 = images.read("/storage/emulated/0/img/刷新.jpg");
         var refresh = findImage(captureScreen(), 刷新, {threshold: 0.8});
-        let { x, y } = refresh;
-        click(x, y);
+        //let { x, y } = refresh;
+        //click(x, y);
+        click(1604, 358);
         log("点刷新");
         sleep(500);
     }
