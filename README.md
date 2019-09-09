@@ -18,6 +18,7 @@
 	[点击下载最新项目包](https://codeload.github.com/Baninn/Auto.js-Starlight-Autoscript/zip/master)
 
 2. 将项目中的全部文件放置于手机存储
+
 	默认目录 `/sdcard/脚本/`
 	
 3. 使用 `Auto.js` 运行 `*.js` 格式的脚本文件
@@ -34,10 +35,13 @@
 
 ### 功能简介
 * Starlight.js 用来刷协力
+
 	请先进入房间选择界面
+	
 	默认选择前三个补胎烧酒，请先设置好队伍
 	
 * talk.js 自动点击マイシアター里的对话拿体力
+
 	请先进入マイシアター页面
 	
 * 所有脚本均加入点击坐标随机偏移
