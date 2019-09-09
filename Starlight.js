@@ -1,6 +1,6 @@
 console.log('脚本启动');
-sleep(1000);
-console.log('请求截图');
+sleep(2000);
+/*console.log('请求截图');
 if (!requestScreenCapture(true)) {
   toast('请求截图失败');
   console.error('请求截图失败');
@@ -8,6 +8,7 @@ if (!requestScreenCapture(true)) {
 }
 toastLog('请求截图成功');
 auto();
+*/
 requestScreenCapture();
 var 刷新 = images.read("./img/刷新.jpg");
 var refresh = findImage(captureScreen(), 刷新, {threshold: 0.8});
@@ -132,6 +133,7 @@ do{
         log("找到表情了: " + emoticon + emoticon.x + "," + emoticon.y);
         emoticon.x += Math.round(Math.random() * Merci.getWidth());
         emoticon.y += Math.round(Math.random() * Merci.getHeight());
+        sleep(500);
         click(emoticon.x, emoticon.y);
     }else{
         log("没找到表情，继续");
@@ -145,6 +147,7 @@ do{
     var again = findImage(captureScreen(), 再入室, {threshold: 0.8});
     if(again){
         log("找到再入室");
+        sleep(500);
         again.x += Math.round(Math.random() * 再入室.getWidth());
         again.y += Math.round(Math.random() * 再入室.getHeight());
         click(again.x,again.y);
