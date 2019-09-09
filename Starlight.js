@@ -9,13 +9,13 @@ if (!requestScreenCapture(true)) {
 toastLog('请求截图成功');
 auto();
 requestScreenCapture();
-var 刷新 = images.read("/storage/emulated/0/img/刷新.jpg");
+var 刷新 = images.read("./img/刷新.jpg");
 var refresh = findImage(captureScreen(), 刷新, {threshold: 0.8});
 
 log("准备找房");
 do{
     log("开始找房");
-    var 房 = images.read("/storage/emulated/0/img/房.jpg");
+    var 房 = images.read("./img/房.jpg");
     log("找到房模板");
     var room = findImage(captureScreen(), 房, {threshold: 0.8});
     if(room){
@@ -29,7 +29,7 @@ do{
         log("点了房"+room.x+","+room.y);
         sleep(1000);
 
-        var 关 = images.read("/storage/emulated/0/img/关.jpg");
+        var 关 = images.read("./img/关.jpg");
         log("找到关模板");
         var close = findImage(captureScreen(), 关, {threshold: 0.6});
         if(close){
@@ -63,7 +63,7 @@ do{
 while(room==null);
 sleep(3000);
 
-var 决定 = images.read("/storage/emulated/0/img/决定.jpg");
+var 决定 = images.read("./img/决定.jpg");
 var decide = findImage(captureScreen(), 决定, {threshold: 0.8});
 log("找到决定了: " + decide + decide.x + "," + decide.y);
 decide.x += Math.round(Math.random() * 决定.getWidth());
@@ -91,7 +91,7 @@ click(xx,yy);
 sleep(1000);
 
 //点准备
-var 准备 = images.read("/storage/emulated/0/img/准备.jpg");
+var 准备 = images.read("./img/准备.jpg");
 var ready = findImage(captureScreen(), 准备, {threshold: 0.8});
 log("找到准备了: " + ready + ready.x + "," + ready.y);
 ready.x += Math.round(Math.random() * 准备.getWidth());
@@ -103,7 +103,7 @@ sleep(3000);
 do{
     log("找自动");
 
-    var 自动 = images.read("/storage/emulated/0/img/auto.jpg");
+    var 自动 = images.read("./img/auto.jpg");
     var at = findImage(captureScreen(), 自动, {threshold: 0.8});
     var close = findImage(captureScreen(), 关, {threshold: 0.6});//房间被解散
     if(close){
@@ -126,7 +126,7 @@ while(at==null);
 
 do{
     log("找表情");
-    var Merci = images.read("/storage/emulated/0/img/Merci.jpg");
+    var Merci = images.read("./img/Merci.jpg");
     var emoticon = findImage(captureScreen(), Merci, {threshold: 0.8});
     if(emoticon){
         log("找到表情了: " + emoticon + emoticon.x + "," + emoticon.y);
@@ -141,7 +141,7 @@ while(emoticon==null);
 
 do{
     log("找再入室");
-    var 再入室 = images.read("/storage/emulated/0/img/再入室.jpg");
+    var 再入室 = images.read("./img/再入室.jpg");
     var again = findImage(captureScreen(), 再入室, {threshold: 0.8});
     if(again){
         log("找到再入室");
@@ -155,7 +155,7 @@ do{
 while(again==null);
 sleep(2000)
 
-var 取消 = images.read("/storage/emulated/0/img/取消.jpg");
+var 取消 = images.read("./img/取消.jpg");
 var cancel = findImage(captureScreen(), 取消, {threshold: 0.8});
 if(cancel){
     log("找到取消");
