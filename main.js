@@ -1,161 +1,153 @@
-console.log('脚本启动')
-auto()
-sleep(1000)
-
-console.log('请求截图')
+console.log('脚本启动');
+sleep(1000);
+console.log('请求截图');
 if (!requestScreenCapture(true)) {
-  toast('请求截图失败')
-  console.error('请求截图失败')
-  exit()
+  toast('请求截图失败');
+  console.error('请求截图失败');
+  exit();
 }
-toastLog('请求截图成功')
-/*
-const SDCARD = files.getSdcardPath()
-const BASE = ''
-// const BASE = SDCARD + '/Pictures/'
-requiresApi(24)
+toastLog('请求截图成功');
+auto();
+requestScreenCapture();
+var 刷新 = images.read("/img/刷新.jpg");
+var refresh = findImage(captureScreen(), 刷新, {threshold: 0.8});
 
-function capture() {
-  let cap = captureScreen()
-  images.save(cap, SDCARD + '/img/cap.jpg')
-  return cap
-}
-*/
-/*
-
-或者
-do{
-    找房；
-    if没找到{
-        刷新；
-    }
-}
-while(找到房=true);
-找OK；
-*/
 log("准备找房");
 do{
     log("开始找房");
-    auto();
-    requestScreenCapture();
-    var 房 = images.read("房.jpg");
+    var 房 = images.read("/img/房.jpg");
     log("找到房模板");
     var room = findImage(captureScreen(), 房, {threshold: 0.8});
     if(room){
         log("room:"+room);
         log("找到房了: " + room);
-        let { x, y } = room;
-        click(x, y);
-        log("点了房");
+        click(room.x,room.y);//防止没点到
+        click(room.x,room.y);
+        click(room.x,room.y);
+        click(room.x,room.y);
+        click(room.x,room.y);
+        log("点了房"+room.x+","+room.y);
         sleep(1000);
-        auto();
-        requestScreenCapture();
-        var close = images.read("关.jpg");
+
+        var 关 = images.read("/img/关.jpg");
         log("找到关模板");
-        var close = findImage(captureScreen(), close, {threshold: 0.6});
+        var close = findImage(captureScreen(), 关, {threshold: 0.6});
         if(close){
             log("发现房没了");
-            let { x, y } = close;
-            click(x, y);
+            close.x += Math.round(Math.random() * 关.getWidth());
+            close.y += Math.round(Math.random() * 关.getHeight());
+            click(close.x,close.y);
             sleep(500);
-            room=null;
+            room=null;//重新找房
+            sleep(1000);
+
+            shua = refresh.x + Math.round(Math.random() * 刷新.getWidth());
+            xin = refresh.y + Math.round(Math.random() * 刷新.getHeight());
+            click(shua, xin);
+            log("点刷新");
+            sleep(500);
         }else{
             log("房还在");
         }
     }else{
         log("room:"+room);
         log("没找到房");
-        auto();
-        requestScreenCapture();
-        var 刷新 = images.read("刷新.jpg");
-        var refresh = findImage(captureScreen(), 刷新, {threshold: 0.8});
-        let { x, y } = refresh;
-        click(x, y);
+        shua = refresh.x + Math.round(Math.random() * 刷新.getWidth());
+        xin = refresh.y + Math.round(Math.random() * 刷新.getHeight());
+        click(shua, xin);
         log("点刷新");
-        sleep(500);
+        //sleep(500);//点刷新的时间间隔
     }
-    log("找房继续");
+    log("本次找房结束");
 }
 while(room==null);
 sleep(3000);
-/*
-auto();
-requestScreenCapture();
-var decide = images.read("决定.jpg");
-log("找到图了");
-var decide = findImage(captureScreen(), decide, {region: [1391, 781, 500, 200],threshold: 0.8});
-if(decide){
-    log("找到了: " + decide);
-    let { x, y } = decide;
-    click(x, y);
-}else{
-    log("没有找到");
-}
-*/
-//点决定
-click(1464,853);
+
+var 决定 = images.read("/img/决定.jpg");
+var decide = findImage(captureScreen(), 决定, {threshold: 0.8});
+log("找到决定了: " + decide + decide.x + "," + decide.y);
+decide.x += Math.round(Math.random() * 决定.getWidth());
+decide.y += Math.round(Math.random() * 决定.getHeight());
+click(decide.x, decide.y);
+//click(1464,853);
 sleep(2000);
 
 //选择三个角色
-click(59,826);//三个角色坐标范围[59,826/198,973][232,826/371,973][402,826/541,973]
+var xx,yy;
+log("第一个角色");
+xx = 59 + Math.round(Math.random() * 140);
+yy = 826 + Math.round(Math.random() * 140);
+click(xx,yy);//三个角色坐标范围[59,826/198,973][232,826/371,973][402,826/541,973]
 sleep(1000);
-click(232,826);
+log("第二个角色");
+xx = 232 + Math.round(Math.random() * 140);
+yy = 826 + Math.round(Math.random() * 140);
+click(xx,yy);
 sleep(1000);
-click(402,826);
+log("第三个角色");
+xx = 402 + Math.round(Math.random() * 140);
+yy = 826 + Math.round(Math.random() * 140);
+click(xx,yy);
 sleep(1000);
-/*
-auto();
-requestScreenCapture();
-var ready = images.read("准备.jpg");
-var ready = findImage(captureScreen(), ready, {threshold: 0.8});
-let { x, y } = ready;
-click(x, y);
-*/
+
 //点准备
-click(1585,937);
+var 准备 = images.read("/img/准备.jpg");
+var ready = findImage(captureScreen(), 准备, {threshold: 0.8});
+log("找到准备了: " + ready + ready.x + "," + ready.y);
+ready.x += Math.round(Math.random() * 准备.getWidth());
+ready.y += Math.round(Math.random() * 准备.getHeight());
+click(ready.x, ready.y);
+//click(1585,937);
 sleep(3000);
 
 do{
     log("找自动");
-    auto();
-    requestScreenCapture();
-    var at = images.read("auto.jpg");
-    var at = findImage(captureScreen(), at, {threshold: 0.8});
+
+    var 自动 = images.read("/img/auto.jpg");
+    var at = findImage(captureScreen(), 自动, {threshold: 0.8});
+    var close = findImage(captureScreen(), 关, {threshold: 0.6});//房间被解散
+    if(close){
+        log("找到取消");
+        close.x += Math.round(Math.random() * 关.getWidth());
+        close.y += Math.round(Math.random() * 关.getHeight());
+        click(close.x,close.y);
+        exit();
+    }
     if(at){
         log("找到自动");
         sleep(4000)
-        let { x, y } = at;
-        click(x, y);
+        at.x += Math.round(Math.random() * 自动.getWidth());
+        at.y += Math.round(Math.random() * 自动.getHeight());
+        click(at.x,at.y);
     }
-    log("没找到自动，继续");
+    
   }
 while(at==null);
-/*
-auto();
-requestScreenCapture();
-var Merci = images.read("Merci.jpg");
-var Merci = findImage(captureScreen(), Merci, {threshold: 0.8});
-let { x, y } = Merci;
-click(x, y);
-*/
-/*
-auto();
-requestScreenCapture();
-var again = images.read("再入室.jpg");
-var again = findImage(captureScreen(), again, {threshold: 0.8});
-let { x, y } = again;
-click(x, y);
-*/
+
+do{
+    log("找表情");
+    var Merci = images.read("/img/Merci.jpg");
+    var emoticon = findImage(captureScreen(), Merci, {threshold: 0.8});
+    if(emoticon){
+        log("找到表情了: " + emoticon + emoticon.x + "," + emoticon.y);
+        emoticon.x += Math.round(Math.random() * Merci.getWidth());
+        emoticon.y += Math.round(Math.random() * Merci.getHeight());
+        click(emoticon.x, emoticon.y);
+    }else{
+        log("没找到表情，继续");
+    }
+  }
+while(emoticon==null);
+
 do{
     log("找再入室");
-    auto();
-    requestScreenCapture();
-    var again = images.read("再入室2.jpg");
-    var again = findImage(captureScreen(), again, {threshold: 0.8});
+    var 再入室 = images.read("/img/再入室.jpg");
+    var again = findImage(captureScreen(), 再入室, {threshold: 0.8});
     if(again){
         log("找到再入室");
-        let { x, y } = again;
-        click(x, y);
+        again.x += Math.round(Math.random() * 再入室.getWidth());
+        again.y += Math.round(Math.random() * 再入室.getHeight());
+        click(again.x,again.y);
     }else{
         log("没找到再入室，继续");
     }
@@ -163,15 +155,14 @@ do{
 while(again==null);
 sleep(2000)
 
-auto();
-requestScreenCapture();
-var cancel = images.read("取消2.jpg");
-var cancel = findImage(captureScreen(), cancel, {threshold: 0.8});
+var 取消 = images.read("/img/取消.jpg");
+var cancel = findImage(captureScreen(), 取消, {threshold: 0.8});
 if(cancel){
     log("找到取消");
-    let { x, y } = cancel;
-    click(x, y);
+    cancel.x += Math.round(Math.random() * 取消.getWidth());
+    cancel.y += Math.round(Math.random() * 取消.getHeight());
+    click(cancel.x,cancel.y);
 }else{
     log("没找到取消");
 }
-
+//exit();
