@@ -17,7 +17,6 @@ log("准备找房");
 do{
     log("开始找房");
     var 房 = images.read("./img/房.jpg");
-    log("找到房模板");
     var room = findImage(captureScreen(), 房, {threshold: 0.8});
     if(room){
         log("room:"+room);
@@ -133,7 +132,7 @@ do{
         log("找到表情了: " + emoticon + emoticon.x + "," + emoticon.y);
         emoticon.x += Math.round(Math.random() * Merci.getWidth());
         emoticon.y += Math.round(Math.random() * Merci.getHeight());
-        sleep(500);
+        sleep(1000);
         click(emoticon.x, emoticon.y);
     }else{
         log("没找到表情，继续");
@@ -165,7 +164,7 @@ if(cancel){
     cancel.x += Math.round(Math.random() * 取消.getWidth());
     cancel.y += Math.round(Math.random() * 取消.getHeight());
     click(cancel.x,cancel.y);
+    exit();
 }else{
     log("没找到取消");
 }
-//exit();

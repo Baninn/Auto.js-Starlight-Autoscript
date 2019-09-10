@@ -8,8 +8,20 @@ if (!requestScreenCapture(true)) {
 }
 toastLog('请求截图成功');
 auto();
-requestScreenCapture();
+//requestScreenCapture();
+/*
 engines.execScriptFile("/storage/emulated/0/脚本/Starlight.js", {
     loopTimes: 5,
     interval: 3000
 });
+*/
+
+engines.execScriptFile("/storage/emulated/0/脚本/Starlight.js");
+sleep(3000);
+engines.execScriptFile("/storage/emulated/0/脚本/Starlight.js");
+sleep(3000);
+engines.execScriptFile("/storage/emulated/0/脚本/Starlight.js");
+sleep(3000);
+engines.execScriptFile("/storage/emulated/0/脚本/Starlight.js");
+sleep(3000);
+engines.execScriptFile("/storage/emulated/0/脚本/Starlight.js");
