@@ -7,8 +7,8 @@ if (!requestScreenCapture(true)) {
   exit();
 }
 toastLog('请求截图成功');
-auto();
 */
+auto();
 requestScreenCapture();
 var 刷新 = images.read("./img/刷新.jpg");
 var refresh = findImage(captureScreen(), 刷新, {threshold: 0.8});
@@ -123,8 +123,11 @@ do{
     
   }
 while(at==null);
-
+sleep(100000);
 do{
+    xx = 1180 + Math.round(Math.random() * 120);
+    yy = 765 + Math.round(Math.random() * 140);
+    click(xx,yy);
     log("找表情");
     var Merci = images.read("./img/Merci.jpg");
     var emoticon = findImage(captureScreen(), Merci, {threshold: 0.8});
@@ -164,7 +167,47 @@ if(cancel){
     cancel.x += Math.round(Math.random() * 取消.getWidth());
     cancel.y += Math.round(Math.random() * 取消.getHeight());
     click(cancel.x,cancel.y);
-    exit();
+    //exit();
 }else{
     log("没找到取消");
 }
+sleep(2000)
+
+var floating = images.read("./img/floating.jpg");
+var window = findImage(captureScreen(), floating, {threshold: 0.8});
+if(window){
+    log("找到悬浮窗");
+    window.x += Math.round(Math.random() * floating.getWidth());
+    window.y += Math.round(Math.random() * floating.getHeight());
+    click(window.x,window.y);
+}else{
+    log("没找到悬浮窗");
+}
+sleep(500)
+
+var jsmenu = images.read("./img/jsmenu.jpg");
+var list = findImage(captureScreen(), jsmenu, {threshold: 0.8});
+if(list){
+    log("找到脚本列表");
+    list.x += Math.round(Math.random() * jsmenu.getWidth());
+    list.y += Math.round(Math.random() * jsmenu.getHeight());
+    click(list.x,list.y);
+}else{
+    log("没找到脚本列表");
+}
+sleep(500)
+
+do{
+    log("找脚本");
+    var mainjs = images.read("./img/mainjs.jpg");
+    var js = findImage(captureScreen(), mainjs, {threshold: 0.8});
+    if(js){
+        log("找到脚本");
+        click(js.x,js.y);
+    }else{
+        log("没找到脚本");
+        swipe(1020, 754, 1020, 369, 200);//1020，754/1020，369
+        sleep(500)
+    }
+  }
+  while(js==null);
