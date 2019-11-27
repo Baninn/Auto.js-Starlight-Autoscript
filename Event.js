@@ -15,17 +15,57 @@ requestScreenCapture();
 开：右边按钮，石头确认，点结果
 不开：左边按钮，点结果
 */
-var count;
+var count=4;
 var 副本 = images.read("./img/副本.jpg");
-var fight = findImage(captureScreen(), 副本, {threshold: 0.8});
-var fu = fight.x + Math.round(Math.random() * 副本.getWidth());
-var ben = fight.y + Math.round(Math.random() * 副本.getHeight());
+var fu,ben,wait = 0;
 do{
     log("开始找关");
-    click(fu, ben);
-    sleep(500);
+    var fight = findImage(captureScreen(), 副本, {threshold: 0.8});
+    if(fight){
+        sleep(500);
+        fu = fight.x + Math.round(Math.random() * 副本.getWidth());
+        ben = fight.y + Math.round(Math.random() * 副本.getHeight());
+        click(fu, ben);
+    }
+    count-=1;
+    if(count == 0)
+    {
+        var 老板 = images.read("./img/boss.jpg");
+        var boss = findImage(captureScreen(), 老板, {threshold: 0.8});
+        if(boss){
+            log("找到boss");
+            wait=1;
+            sleep(500);
+            fu = boss.x + Math.round(Math.random() * 老板.getWidth());
+            ben = boss.y + Math.round(Math.random() * 老板.getHeight());
+            click(fu, ben);
+
+            do{
+                log("找下一个");
+                var 下一个 = images.read("./img/下一个.jpg");
+                var next = findImage(captureScreen(), 下一个, {threshold: 0.8});
+                if(next){
+                    log("找到下一个");
+                    sleep(500);
+                    next.x += Math.round(Math.random() * 下一个.getWidth());
+                    next.y += Math.round(Math.random() * 下一个.getHeight());
+                    click(next.x,next.y);
+                }else{
+                    log("没找到下一个，继续");
+                }
+              }
+            while(next==null);
+
+        }else{
+            log("没找到boss");
+        }
+
+        break;
+    }
+        
 }
 while(fight==null);
+
 sleep(500);
 do{
     var 助战 = images.read("./img/FP.jpg");
@@ -96,6 +136,8 @@ click(fu, ben);
 
 do{
     log("找下一个");
+    sleep(500);
+    click(fu, ben);
     var 下一个 = images.read("./img/下一个.jpg");
     var next = findImage(captureScreen(), 下一个, {threshold: 0.8});
     if(next){
@@ -137,9 +179,20 @@ count = 4;
 do{
     log("找箱子");
     //sleep(500);
-    var 箱子 = images.read("./img/开箱子.jpg");
-    var box = findImage(captureScreen(), 箱子, {threshold: 0.8});
-    if(box){
+    //var 箱子 = images.read("./img/开箱子.jpg");
+    var 免费 = images.read("./img/20%.jpg");
+    var box = findImage(captureScreen(), 免费, {threshold: 0.8});
+    if(box){//不开箱子
+        log("找到箱子");
+        sleep(500);
+        box.x += Math.round(Math.random() * 免费.getWidth());
+        box.y += Math.round(Math.random() * 免费.getHeight());
+        click(box.x,box.y);
+        sleep(4000);
+        click(fu, ben);
+        click(fu, ben);
+    }
+    /*if(box){//用钻开箱子
         log("找到箱子");
         sleep(500);
         box.x += Math.round(Math.random() * 箱子.getWidth());
@@ -161,7 +214,8 @@ do{
         }else{
             log("没找到OK");
         }
-    }else{
+    }*/
+    else{
         log("没找到箱子，继续");
         log("count="+count);
         count-=1;
@@ -173,6 +227,11 @@ while(box == null);//不满足时跳出
 
 sleep(500);
 
+if(wait == 1){
+    sleep(4000);
+    click(fu, ben);
+    sleep(2000);
+}
 
 //重复运行
 var event用float = images.read("./img/event用float.jpg");
