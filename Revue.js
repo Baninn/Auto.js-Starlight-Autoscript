@@ -56,13 +56,13 @@ while(starscore==null);
 sleep(2000)
 
 //点宝箱（如果有）
-setScreenMetrics(1920, 1080);
+//setScreenMetrics(1920, 1080);
 xx = 839 + Math.round(Math.random() * 120);
 yy = 425 + Math.round(Math.random() * 140);
 click(xx,yy);
 click(xx,yy);
 click(xx,yy);
-
+sleep(2000);
 /*
 var 宝石箱 = images.read("./img/宝石箱.jpg");
 var box = findImage(captureScreen(), 宝石箱, {threshold: 0.8});
@@ -74,17 +74,18 @@ click(box.x, box.y);
 
 
 //选择脚本
+
 var floating = images.read("./img/floating.jpg");
 var window = findImage(captureScreen(), floating, {threshold: 0.8});
 if(window){
-    log("找到悬浮窗");
+    log("找到悬浮窗"+ window + window.x + "," + window.y);
     window.x += Math.round(Math.random() * floating.getWidth());
     window.y += Math.round(Math.random() * floating.getHeight());
     click(window.x,window.y);
 }else{
     log("没找到悬浮窗");
 }
-sleep(500)
+sleep(500);
 
 var jsmenu = images.read("./img/jsmenu.jpg");
 var list = findImage(captureScreen(), jsmenu, {threshold: 0.8});
@@ -96,7 +97,7 @@ if(list){
 }else{
     log("没找到脚本列表");
 }
-sleep(500)
+sleep(500);
 
 do{
     log("找脚本");
